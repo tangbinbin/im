@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/signal"
 	"runtime"
+	"sync"
 	"syscall"
 )
 
@@ -41,3 +42,36 @@ func main() {
 	s.Close()
 	tlog.Close()
 }
+
+type Config struct {
+	Addr string      `toml:"addr"`
+	Log  tlog.Config `toml:"log"`
+}
+
+type Server struct{}
+
+func newServer() error {
+	s = new(Server)
+	return nil
+}
+
+func (s *Server) start() {}
+
+func (s *Server) Close() {}
+
+type customer struct{}
+
+type Mapper struct {
+	mu sync.RWMutex
+	ms map[uint64]*customer
+}
+
+func newMapper() *Mapper {
+	return &Mapper{ms: make(map[uint64]*customer, 10240)}
+}
+
+func (m *Mapper) set(c *customer) error {
+	return nil
+}
+
+func (m *Mapper) del(c *customer) {}
