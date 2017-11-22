@@ -1,24 +1,17 @@
 syntax = "proto3";
 package proto;
 
-enum NodeType {
-    NodeTypeMin     = 0x0;
-    NodeTypeIos     = 0x1;
-    NodeTypeAndroid = 0x2; 
-    NodeTypeWeb     = 0x3;
+enum NT {
+  NT_Ios     = 0;
+  NT_Android = 1;
+  NT_Web     = 2;
 }
 
-enum MsgType {
-    MsgTypeUnknown = 0x0;
-    MsgTypeConnect = 0x1;
-    MsgTypeConnack = 0x2;
-    MsgTypeQuit    = 0x3;
-    MsgTypePing    = 0x5;
-    MsgTypePong    = 0x6;
+enum MT {
+  MT_Unknown = 0;
+  MT_ScHello = 1;
 }
 
-message Connect {
-    string  version  = 1;              // 平台分配的客户端clientid
-    string  token    = 2;              // 登录token
-    int32   nodeType = 3;              // 客户端类型
+message ScHello {
+  string rand = 1;
 }

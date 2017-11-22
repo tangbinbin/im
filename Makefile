@@ -11,3 +11,8 @@ dep:
 
 install:dep
 	go install im 
+
+clean:
+	-rm -fr src/github.com
+	-rm -fr bin/*
+	-rm -fr pkg
